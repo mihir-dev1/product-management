@@ -43,7 +43,7 @@
         </div>
         <div class="p-field">
           <label for="image">Image</label>
-          <input type="file" name="file" id="file" formControlName="img" (change)="onFileChanged($event)" pInputText>
+          <input type="file" name="file" id="file" accept="image/png, image/gif, image/jpeg" formControlName="img" (change)="onFileChanged($event)" pInputText>
         </div>
         <div class="p-field">
           <label for="image">Stock</label>
