@@ -1,0 +1,63 @@
+<p-toast></p-toast>
+<div class="navbar-custom">
+  <div class="top-header-task">
+    <button class="button-menu-mobile open-left mb-menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="23.319" height="19.984" viewBox="0 0 23.319 19.984">
+        <path id="_" data-name=""
+          d="M22.41,14.848l-.017,1.411q0,.286-.281.5t-.653.209H1.112q-.376,0-.653-.209t-.28-.5L.164,14.848q0-.287.27-.5t.65-.21H21.491q.377,0,.65.21T22.41,14.848Zm.071-5.686-.018,1.428q0,.29-.282.5t-.657.211H1.055q-.378,0-.656-.211t-.282-.5L.1,9.162q0-.291.271-.5t.654-.213h20.53q.379,0,.654.213T22.481,9.162Zm.071-5.755-.018,1.445q0,.293-.284.507t-.661.214H1q-.38,0-.66-.214T.054,4.853L.038,3.408q0-.294.273-.509t.658-.215H21.622q.381,0,.657.215T22.552,3.408Z"
+          fill="#24975f" />
+      </svg> </button>
+    <div class="task-header-title">
+      <div class="task-img"><img src="/assets/images/icons/dashboard-green.svg"></div>
+      <h3 class="h3 mb-0">Products <span class="small-text d-block">Products / {{title}}</span></h3>
+    </div>
+    <div class="header-search" *ngIf="hideSearch === 'List'">
+      <form class="search-lp">
+        <input type="text" class="form-control" placeholder="Search Products" #inputBox />
+        <span class="search-icon"><img src="/assets/images/icons/Search-gray.svg" class="img-fluid"></span>
+      </form>
+      <div class="search-mb">
+        <button class="btn border-0 search-icon p-0" id="search-btn"><img src="/assets/images/icons/Search-gray.svg"
+            class="img-fluid"></button>
+      </div>
+    </div>
+    <ul class="list-unstyled topbar-menu mb-0">
+      <li class="notification-list">
+        <button class="btn btn-green" (click)="showBasicDialog()">Add New Products</button>
+      </li>
+    </ul>
+  </div>
+</div>
+<p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
+  <form [formGroup]="productForm">
+    <div class="card p-4">
+      <h5>Product</h5>
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="firstname1">Title</label>
+          <input id="firstname1" type="text" formControlName="title" pInputText />
+        </div>
+        <div class="p-field">
+          <label for="description">Description</label>
+          <textarea id="address" type="text" rows="4" formControlName="description" pInputTextarea></textarea>
+        </div>
+        <div class="p-field">
+          <label for="image">Image</label>
+          <input type="file" name="file" id="file" formControlName="img" (change)="onFileChanged($event)" pInputText>
+        </div>
+        <div class="p-field">
+          <label for="image">Stock</label>
+          <p-dropdown [options]="stockOption" formControlName="inStock" optionLabel="value" ></p-dropdown>
+        </div>
+        <div class="p-field">
+          <label for="image">Price</label>
+          <input type="number" name="price" formControlName="price" min="0" id="price" pInputText>
+        </div>
+      </div>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" label="Save" (click)="saveData()" styleClass="p-button-text"></p-button>
+    <p-button icon="pi pi-times" (click)="displayBasic=false" label="Cancle"></p-button>
+  </ng-template>
+</p-dialog>
