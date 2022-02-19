@@ -75,6 +75,10 @@ export class ProductManagementComponent implements OnInit {
   }
 
   onStock(event: any) {
+    let prodList = window.localStorage.getItem('productItem');
+    this.productList = JSON.parse(JSON.stringify(prodList));
+    this.productList = JSON.parse(this.productList);
+    this.temp = JSON.parse(JSON.stringify(this.productList));
     this.productList = this.temp;
     this.productList = this.productList.filter(
       (x: any) => x['inStock']['name'] === 'inStock'
@@ -82,6 +86,10 @@ export class ProductManagementComponent implements OnInit {
   }
 
   outOfStock(event: any) {
+    let prodList = window.localStorage.getItem('productItem');
+    this.productList = JSON.parse(JSON.stringify(prodList));
+    this.productList = JSON.parse(this.productList);
+    this.temp = JSON.parse(JSON.stringify(this.productList));
     this.productList = this.temp;
     this.productList = this.productList.filter(
       (x: any) => x['inStock']['name'] === 'outOfStock'
