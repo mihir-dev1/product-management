@@ -127,6 +127,7 @@ export class ProductManagementComponent implements OnInit {
       this.productList[id]['description']
     );
     this.productForm.controls.img.patchValue(this.productList[id]['img']);
+    this.productForm.controls.inStock.patchValue(this.productList[id]['inStock']);
     this.productForm.controls.price.patchValue(this.productList[id]['price']);
     this.productForm.controls.isActive.patchValue(
       this.productList[id]['isActive']
@@ -134,12 +135,44 @@ export class ProductManagementComponent implements OnInit {
   }
 
   updateProduct() {
-    this._common.updateProd(this.productForm.value, this.selectedIndex);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Update Products Successfully',
-    });
+    console.log(this.productForm.value)
+    if (this.productForm.status == 'INVALID') {
+      if (!this.productForm.controls.title.value) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Title is required and max length is 50',
+        });
+      }
+      if (!this.productForm.controls.description.value) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Description is required and max length is 150',
+        });
+      }
+      if (!this.productForm.controls.img.value) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Image is required',
+        });
+      }
+      if (!this.productForm.controls.price.value) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Price is required',
+        });
+      }
+    } else {
+      this._common.updateProd(this.productForm.value, this.selectedIndex);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Update Products Successfully',
+      });
+    }
   }
 
   deleteProduct(item: any) {
